@@ -9,7 +9,7 @@
 2. Download the Husky robot source code from this [link](https://github.com/husky/husky) and move all folders to catkin_ws/src
 
 
-3. Create a customized URDF file according to this [link](https://github.com/clearpathrobotics/cpr_gazebo/tree/noetic-devel) and place the URDF file at $HOME/Desktop/realsense.urdf.xacro
+3. Create a customized URDF file according to this [link](https://www.clearpathrobotics.com/assets/guides/kinetic/husky/additional_sim_worlds.html) and place the URDF file at $HOME/Desktop/realsense.urdf.xacro
 
 
 4. Build

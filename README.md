@@ -4,7 +4,7 @@
 
 ## How to Build and Run:
 
-1. Download the construction office world and cpr accessories from this [link](https://github.com/clearpathrobotics/cpr_gazebo/tree/noetic-devell) and move the two folders to catkin_ws/src
+1. Download the construction office world and cpr accessories from this [link](https://github.com/clearpathrobotics/cpr_gazebo/tree/noetic-devel) and move the two folders to catkin_ws/src
 
 2. Download the Husky robot source code from this [link](https://github.com/husky/husky) and move all folders to catkin_ws/src
 

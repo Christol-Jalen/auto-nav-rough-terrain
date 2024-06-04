@@ -15,36 +15,37 @@
 4. Build
 
 ```console
-$ catkin_make
+catkin_make
 ```
 
 5. Mount the sensor to the Husky robot and launch the world & Husky
 
 ```console
-$ export HUSKY_URDF_EXTRAS=$HOME/Desktop/realsense.urdf.xacro
-$ roslaunch cpr_office_gazebo office_construction_world.launch platform:=husky
+export HUSKY_URDF_EXTRAS=$HOME/Desktop/realsense.urdf.xacro
+roslaunch cpr_office_gazebo office_construction_world.launch platform:=husky
 ```
 
 6. Launch rviz
 
 ```console
-$ export HUSKY_URDF_EXTRAS=$HOME/Desktop/realsense.urdf.xacro
-$ roslaunch husky_viz view_robot.launch
+export HUSKY_URDF_EXTRAS=$HOME/Desktop/realsense.urdf.xacro
+roslaunch husky_viz view_robot.launch
 ```
 
 7. Launch husky_navigation
 
 ```console
-$ roslaunch husky_navigation gmapping_demo.launch
+roslaunch husky_navigation gmapping_demo.launch
 ```
 
 8. Launch octomap
 
 ```console
-$ roslaunch octomap_server octomap_mapping.launch
+roslaunch octomap_server octomap_mapping.launch
 ```
 
 9. Run ORB-SLAM 2
+    
 ```console
 roslaunch orb_slam2_ros orb_slam2_d435_rgbd.launch
 ```

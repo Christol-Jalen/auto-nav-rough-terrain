@@ -28,7 +28,6 @@ roslaunch cpr_office_gazebo office_construction_world.launch platform:=husky
 6. Launch rviz
 
 ```console
-export HUSKY_URDF_EXTRAS=$HOME/Desktop/realsense.urdf.xacro
 roslaunch husky_viz view_robot.launch
 ```
 

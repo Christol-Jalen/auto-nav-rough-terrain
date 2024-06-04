@@ -43,3 +43,8 @@ $ roslaunch husky_navigation gmapping_demo.launch
 ```console
 $ roslaunch octomap_server octomap_mapping.launch
 ```
+
+9. Run ORB-SLAM 2
+```console
+roslaunch orb_slam2_ros orb_slam2_d435_rgbd.launch
+```

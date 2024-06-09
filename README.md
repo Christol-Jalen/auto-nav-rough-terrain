@@ -27,7 +27,7 @@ roslaunch husky_viz view_robot.launch
 4. Launch gmapping SLAM algorithm
 
 ```console
-roslaunch husky_navigation gmapping_demo.launch
+roslaunch husky_navigation gmapping.launch
 ```
 
 5. Launch octomap

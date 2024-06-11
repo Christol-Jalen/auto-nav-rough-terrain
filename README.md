@@ -6,15 +6,15 @@
 
 1. Create a catikn_ws folder and clone the repository.
 ```console
-$ mkdir catkin_ws
-$ git clone https://github.com/Christol-Jalen/Project-ANVRT.git
-$ catkin_make
+git clone https://github.com/Christol-Jalen/Project-ANVRT.git
+cd Project-ANVRT
+catkin_make
 ```
 
 2. Mount the sensor to the Husky robot and launch the world & Husky
 
 ```console
-export HUSKY_URDF_EXTRAS=$HOME/Desktop/realsense.urdf.xacro
+export HUSKY_URDF_EXTRAS=$HOME/Project-ANVRT/realsense.urdf.xacro
 roslaunch cpr_office_gazebo office_construction_world.launch platform:=husky
 ```
 

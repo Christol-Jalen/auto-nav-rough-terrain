@@ -1,0 +1,259 @@
+classdef visualizationHelper < nav.algs.internal.InternalAccess & ...
+        matlabshared.autonomous.map.internal.InternalAccess
+% Copyright 2021-2023 The MathWorks, Inc.
+    methods
+        function show(obj, map, varargin)
+            % Parse inputs
+            results = visualizationHelper.parseInputs(varargin{:});
+            ax = results.axes;
+
+            holdState = ishold(ax);
+            if holdState
+                holdState = 'on';
+            else
+                holdState = 'off';
+            end
+            cleanFcn = onCleanup(@()hold(ax,holdState));
+
+            if isstring(results.hold) && ~isnan(all(char(results.hold))) || ~isnan(results.hold)
+                hold(ax,results.hold);
+            end
+
+%             % Display map
+%             if isnan(results.occupiedThreshold)
+%                 occupiedThreshold = 1;
+%             else
+%                 occupiedThreshold = results.occupiedThreshold;
+%             end
+
+            cMapProvided = ~all(isnan(results.colormap),'all');
+            thresholdProvided = ~isnan(results.Threshold);
+
+            % Retrieve maximum finite input value
+            maxVal = max(map.getMapData,[],'all');
+
+            if ~cMapProvided
+                if ~thresholdProvided
+                    cmap = colormap(ax);
+                else
+                    % Find ratio between threshold and max value
+                    ratio = min(results.Threshold/maxVal,1);
+
+                    % Create map which scales from gray to blue (below threshold)
+                    % then from dark to bright red (above threshold)
+                    ratioIdx = ceil(ratio*100);
+
+                    cmap = [[.5 .5 .5]+linspace(0,.5,ratioIdx)'.*[-1 -1 1]; ... % Gray to blue
+                            [.25 0 0]+linspace(0,1,100-ratioIdx)'*[.75 0 0]]; ... % Dark to bright red
+                end
+            else
+                cmap = results.colormap;
+                
+                if results.Threshold > maxVal && isequal(results.colormap(end,:),[0 0 0])
+                    % No occupied cells
+                    cmap(end,:) = cmap(end-1,:);
+                end
+            end
+
+            obj.showCostMap(map,results.Threshold,ax,false,false,true,cmap);
+            colormap(ax,cmap);
+            
+            % Update Axes
+            visualizationHelper.configureAxes(ax,results);
+
+            % Add colorbar
+            c = colorbar(ax);
+
+            % Update ticks
+            if ~isnan(results.TickRange)
+                tr = results.TickRange;
+                c.TickLabels = tr(1) + ((1:5)'/5)*diff(tr);
+            end
+        end
+
+        function [axHandle, imageHandle, fastUpdate] = showCostMap(~, map, threshold, axHandle, isGrid, isLocal, fastUpdate, cmap)
+        %showMap Display the occupancy grid in a figure
+        %   [AH, IH] = showCostMap(OBJ, MAT, AXHANDLE, ISGRID, ISLOCAL) plots the
+        %   matrix MAT using imshow function on the provided axes AXHANDLE
+        %   and returns the axes handle AH and image handle IH. ISGRID and
+        %   ISLOCAL are used to indicate if the axes label need to be in 
+        %   world, local, or grid indice. If FASTUPDATE is true, showGrid
+        %   will only update the CData of the plot if a map has already
+        %   been shown on the current axes.
+
+        % If axes not given, create an axes
+        % The newplot function does the right thing
+            if fastUpdate
+                if isempty(axHandle)
+                    % Get the current axes if none is provided, or create
+                    % one if none exist
+                    axHandle = gca;
+                end
+            else
+                if isempty(axHandle)
+                    % Retrieve the current axes or create one. If hold
+                    % all/on is applied, this will not clear the axes
+                    % children
+                    axHandle = newplot;
+                end
+            end
+
+            % Get all children of the axes
+            imageHandle = findobj(axHandle,'Type','image');
+
+            % Format data for correct color scaling (convert inf-values to "occupied" values)
+            imgData = map.getMapData;
+
+%             data(data < threshold) = round(data)
+%             data(isnan(data)) = 0;
+%             data(data > maxVal) = maxVal;
+%             v = unique(data(:));
+            
+%             [imgData, ~] = discretize(data,[-inf linspace(0,v(end-1),numBin-1) inf],'IncludedEdge','right');
+
+            if ~isempty(imageHandle) && fastUpdate
+                % Check if the axes is already being used to display the map
+                if ~isscalar(imageHandle)
+                    % Get the handle to the image used to display a map most
+                    % recently
+                    imageHandle = imageHandle(contains({imageHandle(:).Tag},map.ImageTag));
+                    imageHandle = imageHandle(1);
+                end
+
+                if (isGrid && imageHandle.Tag(end) ~= 'G') || (~isGrid && imageHandle.Tag(end) == 'G')
+                    % Plotted frame is different from previous call to show,
+                    % update labels
+                    fastUpdate = 0;
+                else
+                    % Last call to show uses the same x/y labels, skip
+                    % updating them
+                end
+                axHandle.Visible = 'off';
+                imageHandle.Visible = 'off';
+            else
+                % No longer fast-update eligible
+                fastUpdate = 0;
+
+                % Create image handle for map
+                imageHandle = imagesc(imgData,'Parent',axHandle,'CDataMapping','scaled');
+
+                % Make axes invisible before plotting
+                axHandle.Visible = 'off';
+                imageHandle.Visible = 'off';
+
+                axHandle.DataAspectRatio = [1 1 1];
+            end
+
+            gSize = map.SharedProperties.GridSize;
+            res   = map.SharedProperties.Resolution;
+
+            % Change the axes limits, X data and Y data to show world
+            % coordinates or grid indices on the figure
+            if isGrid
+                if ~fastUpdate
+                    % Skip the slow elements that don't need to be updated
+
+                    % Set the axes
+                    axHandle.XLabel.String = nav.algs.internal.MapUtils.ColLabel;
+                    axHandle.YLabel.String = nav.algs.internal.MapUtils.RowLabel;
+                    set(axHandle, 'YDir', 'reverse');
+                    imageHandle.Tag = 'mapLayerGrid';
+                end
+                % Get the grid size
+                xdata = [1, gSize(2)];
+                ydata = [1, gSize(1)];
+
+                % Compute the grid limits
+                xlimits = [0.5, gSize(2)+0.5];
+                ylimits = [0.5, gSize(1)+0.5];
+            else
+                if ~fastUpdate
+                    % Skip the slow elements that don't need to be updated
+
+                    % Set the axes
+                    axHandle.XLabel.String = nav.algs.internal.MapUtils.XLabel;
+                    axHandle.YLabel.String = nav.algs.internal.MapUtils.YLabel;
+                    set(axHandle, 'YDir', 'normal');
+                end
+
+                % Get the proper limits
+                if (isLocal)
+                    imageHandle.Tag = 'mapLayerLocal';
+                    xlimits = map.SharedProperties.XLocalLimits;
+                    ylimits = map.SharedProperties.YLocalLimits;
+                else
+                    imageHandle.Tag = 'mapLayerWorld';
+                    xlimits = map.SharedProperties.XWorldLimits;
+                    ylimits = map.SharedProperties.YWorldLimits;
+                end
+
+                % Adjust map axes by the internal grid offset
+                topLeftLoc = [xlimits(1) ylimits(1)] + 1/(2*res);
+
+                botRightLoc = [xlimits(2) ylimits(2)] - 1/(2*res);
+
+                % Set XData and YData
+                if (abs(xlimits(1)-xlimits(2)+1/res) < eps)
+                    % Special case when there is only one cell
+                    xdata = [xlimits(1), xlimits(2)];
+                else
+                    xdata = [topLeftLoc(1), botRightLoc(1)];
+                end
+
+                if (abs(ylimits(1)-ylimits(2)+1/res) < eps)
+                    ydata = [ylimits(2), ylimits(1)];
+                else
+                    ydata = flip([topLeftLoc(2), botRightLoc(2)]);
+                end
+            end
+
+            % Set new image data
+            imageHandle.CData = imgData;
+            imageHandle.XData = xdata;
+            imageHandle.YData = ydata;
+            axHandle.XLim = xlimits;
+            axHandle.YLim = ylimits;
+
+            axHandle.Visible = 'on';
+            imageHandle.Visible = 'on';
+        end
+    
+        function formatAxes(obj, varargin)
+            % parse inputs
+            results = visualizationHelper.parseInputs(varargin{:});
+
+            % update axes
+            visualizationHelper.configureAxes(results.axes,results);
+        end
+    end
+
+    methods (Static)
+        function configureAxes(ax,p)
+            names = fieldnames(p);
+            customVisNames = {'axes','TickRange','Threshold'};
+            for i = 1:numel(names)
+                v = convertStringsToChars(p.(names{i}));
+                if all(~strcmp(char(names{i}),customVisNames)) && ~all(isnan(v),'all')
+                    f = str2func(names{i});
+                    f(ax,p.(names{i}));
+                end
+            end
+        end
+
+        function results = parseInputs(varargin)
+            p = inputParser;
+            isStrInput = @(x)ischar(x) || isStringScalar(x);
+            addOptional(p,'axes',gca,@(x)isa(x,'matlab.graphics.axis.Axes'));
+            addParameter(p,'xlabel','X (m)',isStrInput);
+            addParameter(p,'ylabel','Y (m)',isStrInput);
+            addParameter(p,'zlabel',nan,isStrInput);
+            addParameter(p,'colormap',nan,@(x)isnumeric(x) || isStrInput(x));
+            addParameter(p,'hold',nan,@(x)any(strcmpi(x,{'on','off'})));
+            addParameter(p,'title',nan,isStrInput);
+            addParameter(p,'TickRange',nan,@(x)validateattributes(x,{'numeric'},{'numel',2,'increasing','finite'}));
+            addParameter(p,'Threshold',nan,@(x)validateattributes(x,{'numeric'},{'scalar','positive'}));
+            parse(p,varargin{:});
+            results = p.Results;
+        end
+    end
+end

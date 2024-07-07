@@ -36,6 +36,13 @@ roslaunch husky_navigation gmapping.launch
 roslaunch octomap_server octomap_mapping.launch
 ```
 
+6. Save Maps
+
+```console
+rosrun octomap_server octomap_saver octomap_name.bt
+rosrun map_server map_saver -f occupancy_name
+```
+
 
 ======================================
 ```console

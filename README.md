@@ -43,8 +43,13 @@ rosrun octomap_server octomap_saver octomap_name.bt
 rosrun map_server map_saver -f occupancy_name
 ```
 
+7. Locolization
 
-======================================
+```console
+roslaunch husky_navigation amcl_navigation.launch
+```
+
+==============================================
 ```console
 rosrun rqt_tf_tree rqt_tf_tree
 ```

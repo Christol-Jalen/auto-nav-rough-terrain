@@ -119,7 +119,13 @@
         </technique>
       </profile_COMMON>
       <!-- Custom properties for physics -->
-	 
+	  <extra>
+	    <technique profile="PhysicsProperties">
+	      <dynamic_friction>0.5</dynamic_friction>
+	      <static_friction>0.6</static_friction>
+	      <restitution>0.3</restitution>
+	    </technique>
+	  </extra>
     </effect>
     <effect id="MetalCorrugatedIronSheet002_3K-effect">
       <profile_COMMON>

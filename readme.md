@@ -65,3 +65,6 @@ If the co-simulation connection is established properly, you will see the husky 
 There is a video demonstrating the whole project.
 
 <iframe width="560" height="315" src="https://youtu.be/zRUjdgBzka8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<a href="https://youtu.be/zRUjdgBzka8" target="_blank"><img src="http://img.youtube.com/vi/zRUjdgBzka8/0.jpg" 
+alt="Autonomous Navigation" width="240" height="180" border="10" /></a>

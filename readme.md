@@ -1,5 +1,8 @@
 # Autonomous Robot Navigation in Rough Terrain
 
+## Overview
+The aim of this project is to demo a husky robot working in a construction site, moving from point A to point B.The construction site has minor bumps and obstables. The husky robot is equipped with a Realsense D435 depth camera and a Hokuyo UST10 lidar. MATLAB and Simulink are used and are co-simulated with Gazebo.
+
 ## Motivation
 The existing method for on-road robot automation often involves finding the shortest path for a wheeled robot in the presence of obstacles. The planner often assume that the planning space is a 2-D Cartesian plane, with certain regions marked as off limits due to the presence of obstacles. However, when it comes to offroad vehicles, environments can also contain changes in elevation, turning this into a 3-dimensional problem. Compared to on-road vehicle automation, off-road autonomous driving faces the following additional challenges:
 
@@ -8,9 +11,6 @@ The existing method for on-road robot automation often involves finding the shor
 • Distinguish between slopes and obstacles
 
 • Wheels slippery
-
-## Aim
-The aim of this project is to demo a husky robot working in a construction site, moving from point A to point B.The construction site has minor bumps and obstables. The husky robot is equipped with a Realsense D435 depth camera and a Hokuyo UST10 lidar. MATLAB and Simulink are used and are co-simulated with Gazebo.
 
 ## Methods
 ### 1. Mapping

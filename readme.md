@@ -38,7 +38,7 @@ Based on the DEM, we obtain the terrain slope map. We can also obtain the terrai
 Finally, we combine the terrain slope map and the terrain obstacle map into a general cost map. We use A* to calculate the pathes.
 
 <div style="display: flex; justify-content: space-between;">
-  <img src="./images/planning_4.png" alt="Image" style="width: 80%;"/>
+  <img src="./images/planning_4.png" alt="Image" style="width: 60%;"/>
 </div>
 
 

@@ -57,12 +57,7 @@ In the Linux environment, start the gazebo simulation.
 source devel/setup.bash
 roslaunch cpr_office_gazebo office_construction_world.launch platform:=husky
 ```
-
-Run the amcl locolization.
-```
-source devel/setup.bash
-roslaunch husky_navigation amcl_navigation.launch
-```
+The above launch file will also run the amcl localization node.
 
 Establish the Simulink-Gazebo co-simulation by looking at this [tutorial](https://uk.mathworks.com/help/robotics/ug/perform-co-simulation-between-simulink-and-gazebo.html).  Then run the Simulink model ./OffroadPlanning/controlling.slx
 

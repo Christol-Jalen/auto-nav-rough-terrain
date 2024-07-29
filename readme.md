@@ -1,7 +1,11 @@
 # Autonomous Robot Navigation in Rough Terrain
 
 ## Overview
-The aim of this project is to demo a husky robot working in a construction site, moving from point A to point B.The construction site has minor bumps and obstables. The husky robot is equipped with a Realsense D435 depth camera for 3D mapping and a Hokuyo UST10 lidar for locolization. The path is planned using MATLAB, and the control is realised by Simulink-Gazebo co-simulation.
+The aim of this project is to demo a husky robot working in a construction site, moving from point A to point B.The construction site has minor bumps and obstables. The path is planned using MATLAB, and the control is realised by Simulink-Gazebo co-simulation. The husky robot is equipped with the following sensors: 
+
+• A Realsense D435 depth camera
+
+• A Hokuyo UST10 lidar
 
 <div style="display: flex; justify-content: center;">
   <img src="./images/robot.png" alt="Image" style="width: 70%;"/>

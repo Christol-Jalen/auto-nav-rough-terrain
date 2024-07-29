@@ -34,4 +34,7 @@
       <arg name="z" value="$(arg robot_z)"/>
       <arg name="yaw" value="$(arg robot_yaw)"/>
     </include>
+    
+    <include file="$(find husky_navigation)/launch/amcl_navigation.launch"/>
+    
 </launch>

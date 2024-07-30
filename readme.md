@@ -72,7 +72,7 @@ alt="Autonomous Navigation" width="560" height="315" border="10" /></a>
 
 ## Evaluation
 <div style="display: flex; justify-content: center;">
-  <img src="./images/evaluation.png" alt="Image" style="width: 70%;"/>
+  <img src="./images/evaluation.png" alt="Image" style="width: 100%;"/>
 </div>
 
 ## Reference

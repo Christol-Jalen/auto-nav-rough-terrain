@@ -70,4 +70,9 @@ There is a video demonstrating the whole project.
 <a href="https://youtu.be/zRUjdgBzka8" target="_blank"><img src="http://img.youtube.com/vi/zRUjdgBzka8/0.jpg" 
 alt="Autonomous Navigation" width="560" height="315" border="10" /></a>
 
+## Evaluation
+<div style="display: flex; justify-content: center;">
+  <img src="./images/evaluation.png" alt="Image" style="width: 70%;"/>
+</div>
+
 ## Reference

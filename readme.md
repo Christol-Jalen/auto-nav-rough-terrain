@@ -80,5 +80,7 @@ alt="Autonomous Navigation" width="560" height="315" border="10" /></a>
 
 ## Reference
 [1] [Clearpath Husky](https://github.com/husky/husky)
+
 [2] [Offroad Planning with Digital Elevation Models](https://ww2.mathworks.cn/help/nav/ug/offorad-planning-on-digital-elevation-models.html)
+
 [3] [Path Following with Obstacle Avoidance in Simulink®](https://ww2.mathworks.cn/help/nav/ug/path-following-with-obstacle-avoidance-in-simulink.html)

@@ -1,5 +1,8 @@
 # Autonomous Robot Navigation in Rough Terrain
 
+## Author
+Yujie Wang (ucab211@ucl.ac.uk)
+
 ## Overview
 The aim of this project is to demo a husky robot working in a construction site, moving from point A to point B.The construction site has minor bumps and obstables. The path is planned using MATLAB, and the control is realised by Simulink-Gazebo co-simulation. The husky robot is equipped with the following sensors: 
 
@@ -76,3 +79,6 @@ alt="Autonomous Navigation" width="560" height="315" border="10" /></a>
 </div>
 
 ## Reference
+[1] [Clearpath Husky](https://github.com/husky/husky)
+[2] [Offroad Planning with Digital Elevation Models](https://ww2.mathworks.cn/help/nav/ug/offorad-planning-on-digital-elevation-models.html)
+[3] [Path Following with Obstacle Avoidance in Simulink®](https://ww2.mathworks.cn/help/nav/ug/path-following-with-obstacle-avoidance-in-simulink.html)

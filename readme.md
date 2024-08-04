@@ -62,7 +62,7 @@ roslaunch cpr_office_gazebo office_construction_world.launch platform:=husky
 ```
 The above launch file will also run the amcl localization node.
 
-Establish the Simulink-Gazebo co-simulation by looking at this [tutorial](https://uk.mathworks.com/help/robotics/ug/perform-co-simulation-between-simulink-and-gazebo.html).  Then run the Simulink model ./OffroadPlanning/controlling.slx
+Establish the Simulink-Gazebo co-simulation by looking at this [tutorial](https://uk.mathworks.com/help/robotics/ug/perform-co-simulation-between-simulink-and-gazebo.html).  Then run the Simulink controller model ./OffroadPlanning/controlling.slx
 
 If the co-simulation connection is established properly, you will see the husky robot moving along the planned path.
 

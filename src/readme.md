@@ -16,7 +16,7 @@ catkin_make
 2. Mount the sensor to the Husky robot and launch the world & Husky
 
 ```console
-export HUSKY_URDF_EXTRAS=./realsense.urdf.xacro
+export HUSKY_URDF_EXTRAS=$HOME/auto-nav-rough-terrain/realsense.urdf.xacro
 source devel/setup.bash
 roslaunch cpr_office_gazebo office_construction_world.launch platform:=husky
 ```

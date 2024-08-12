@@ -14,10 +14,11 @@ y4 = paths_offset{3,1}(:, 2);
 figure;
 plot(x1, y1, 'k', 'LineWidth', 2);% ground truth trajectory
 hold on;
-plot(x2, y2, 'r', 'LineWidth', 2);% amcl trajctory
-plot(x3, y3, 'b', 'LineWidth', 2);% odom trajctory
+% plot(x2, y2, 'r', 'LineWidth', 2);% amcl trajctory
+% plot(x3, y3, 'b', 'LineWidth', 2);% odom trajctory
 plot(x4, y4, 'g', 'LineWidth', 2);% planned trajctory
-legend('ground truth', 'amcl', 'odometry', 'planned path');
+% legend('ground truth', 'amcl', 'odometry', 'planned');
+legend('ground truth', 'planned');
 xlabel('X(m)');
 ylabel('Y(m)');
 title('Trajctory Evalutation');

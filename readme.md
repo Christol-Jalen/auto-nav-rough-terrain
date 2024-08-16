@@ -74,7 +74,7 @@ There is a video demonstrating the whole project.
 alt="Autonomous Navigation" width="560" height="315" border="10" /></a>
 
 ## Evaluation
-<div style="display: flex; justify-content: center;">
+<div style="display: flex; justify-content: space-between;">
   <img src="./images/evaluation.png" alt="Image" style="width: 100%;"/>
 </div>
 
